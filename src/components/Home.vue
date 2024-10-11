@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <MainNav />
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <input v-model="searchQuery" placeholder="Search for recipes" />
-    <v-btn @click="searchRecipes(searchQuery)">Search</v-btn>
-    <div v-if="searchQuery !== ''" class="recipe-list">
-      <CardRecipe v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+  <div class="home-container">
+    <MainNav :searchRecipes="searchRecipes" />
+
+
+
+
+
+    <div v-if="recipes.length > 0" class="recipe-list">
+      <h1 class="results-title">Results</h1>
+      <div class="recipes-wrapper">
+        <CardRecipe v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+      </div>
+    </div>
+    <div v-else class="no-results">
+      <p>No recipes found. Please try a different search!</p>
     </div>
   </div>
 </template>
@@ -24,41 +28,57 @@ export default {
   name: 'Home',
   components: { MainNav, CardRecipe },
   setup() {
-    const searchQuery = ref('');
     const recipes = ref([]);
 
     const searchRecipes = async (query) => {
-      console.log("Fetching recipes for query:", query);
-      await fetchRecipes(query); // Appelle fetchRecipes avec la requête
-    };
-
-    const fetchRecipes = async (query) => {
-      try {
-        const data = await getRecipes(query);
-
-        // Afficher chaque recette dans la console
-        data.results.forEach(recipe => {
-          console.log(`Recipe ID: ${recipe.id}, Title: ${recipe.title}, Image: ${recipe.image}`);
-        });
-
-        recipes.value = data.results; // Met à jour les recettes
-      } catch (error) {
-        console.error('Failed to fetch recipes:', error);
-      }
+      const data = await getRecipes(query);
+      recipes.value = data.results || []; // Met à jour les recettes
     };
 
     return {
-      searchQuery,
       recipes,
       searchRecipes,
     };
-  },
-};
+  }
+}
 </script>
 
-<style>
+<style scoped>
+.home-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.results-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
 .recipe-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recipes-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espace entre les cartes de recettes */
+}
+
+.card-recipe {
+  width: 300px; /* Largeur fixe pour les cartes */
+  background: #f9f9f9; /* Couleur de fond des cartes */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre pour un effet 3D */
+  padding: 16px; /* Padding intérieur */
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666; /* Couleur plus douce pour le texte */
 }
 </style>
