@@ -29,7 +29,7 @@ export const getRecipes = async (query) => {
 export const getRecipeInfo = async (id) => {
   try {
     console.log('ID sent to API:', id);
-    const response = await getRecipeInfo(`/recipes/${id}/information`);
+    const response = await spoonacularApi.get(`/recipes/${id}/information`);
     console.log('API Response:', response);
     return response.data;
   } catch (error) {
