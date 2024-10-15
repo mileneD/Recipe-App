@@ -1,14 +1,12 @@
 <template>
     <div class="recipe-container">
         <h1 class="text-center">Recipe Information</h1>
+
+        <router-link :to="{ name: 'home', query: { q: searchQuery } }" class="btn-back">Back to Results</router-link>
+
         <div v-if="recipe" class="recipe-card">
             <h2>{{ recipe.title }}</h2>
-            <img
-                class="img-card"
-                :src="recipe.image"
-                :alt="recipe.title"
-                @error="imageError = true"
-            />
+            <img class="img-card" :src="recipe.image" :alt="recipe.title" @error="imageError = true" />
 
             <div class="recipe-details">
                 <p><strong>Servings:</strong> {{ recipe.servings }}</p>
@@ -18,46 +16,41 @@
                 <p v-if="recipe.healthScore"><strong>Health Score:</strong> {{ recipe.healthScore }}/100</p>
                 <p v-if="recipe.diets.length"><strong>Diets:</strong> {{ recipe.diets.join(', ') }}</p>
                 <p v-if="recipe.dishTypes.length"><strong>Dish Type:</strong> {{ recipe.dishTypes.join(', ') }}</p>
-                <p v-if="recipe.creditsText"><strong>Credits:</strong> {{ recipe.creditsText }}</p>
                 <p v-if="recipe.summary" v-html="recipe.summary"></p>
-                <p v-if="recipe.sourceName"><strong>Source:</strong> <a :href="recipe.sourceUrl" target="_blank">{{ recipe.sourceName }}</a></p>
+                <p v-if="recipe.sourceName"><strong>Source:</strong> <a :href="recipe.sourceUrl" target="_blank">{{
+                        recipe.sourceName }}</a></p>
                 <p v-if="recipe.spoonacularScore"><strong>Spoonacular Score:</strong> {{ recipe.spoonacularScore }}</p>
-                <p v-if="recipe.pricePerServing"><strong>Price Per Serving:</strong> ${{ recipe.pricePerServing.toFixed(2) }}</p>
+                <p v-if="recipe.pricePerServing"><strong>Price Per Serving:</strong> ${{
+                    recipe.pricePerServing.toFixed(2) }}</p>
+                <p v-if="recipe.creditsText"><strong>Credits:</strong> {{ recipe.creditsText }}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { useRecipeStore } from '../stores/recipeStore';
 import { useRoute } from 'vue-router';
-import { getRecipeInfo } from '@/services/spoonacularService';
+import { onMounted, ref } from 'vue';
 
 export default {
     name: 'RecipeInfo',
     setup() {
+        const recipeStore = useRecipeStore();
         const route = useRoute();
-        const recipe = ref(null);
-        const imageError = ref(false)
-
-        const fetchRecipeInfo = async (id) => {
-            try {
-                recipe.value = await getRecipeInfo(id);
-            } catch (error) {
-                console.error('Error fetching recipe info:', error);
-            }
-        };
+        const imageError = ref(false);
 
         onMounted(() => {
-            fetchRecipeInfo(route.params.id); // Charger la recette initiale
+            recipeStore.fetchRecipeInfo(route.params.id);
         });
 
         return {
-            recipe,
-            imageError
+            recipe: recipeStore.recipe,
+            imageError,
+            searchQuery: recipeStore.searchQuery,
         };
-    }
-}
+    },
+};
 </script>
 
 <style scoped>
@@ -108,4 +101,25 @@ h2 {
 strong {
     color: #2c3e50;
 }
-</style>F
+
+.btn-back {
+    display: inline-block;
+    /* Changer le style pour rendre le lien comme un bouton */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    /* Supprime le soulignement */
+    text-align: center;
+    /* Centre le texte */
+}
+
+.btn-back:hover {
+    background-color: #0056b3;
+}
+</style>

@@ -1,5 +1,6 @@
 <template>
   <div class="">
+
     <v-card elevated class="mx-4 my-4 card-recipe ">
       <v-card-title class="flex">{{ recipe.title }}</v-card-title>
       <v-card-text>
