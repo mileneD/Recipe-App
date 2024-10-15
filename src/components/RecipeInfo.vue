@@ -10,18 +10,35 @@
 
             <div class="recipe-details">
                 <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+
                 <p><strong>Preparation Time:</strong> {{ recipe.readyInMinutes }} minutes</p>
+
                 <p v-if="recipe.cookingMinutes"><strong>Cooking Time:</strong> {{ recipe.cookingMinutes }} minutes</p>
+
                 <p v-if="recipe.aggregateLikes">Likes: {{ recipe.aggregateLikes }}</p>
+
                 <p v-if="recipe.healthScore"><strong>Health Score:</strong> {{ recipe.healthScore }}/100</p>
+
                 <p v-if="recipe.diets.length"><strong>Diets:</strong> {{ recipe.diets.join(', ') }}</p>
+
                 <p v-if="recipe.dishTypes.length"><strong>Dish Type:</strong> {{ recipe.dishTypes.join(', ') }}</p>
+
                 <p v-if="recipe.summary" v-html="recipe.summary"></p>
-                <p v-if="recipe.sourceName"><strong>Source:</strong> <a :href="recipe.sourceUrl" target="_blank">{{
-                        recipe.sourceName }}</a></p>
+
+                <p v-if="recipe.sourceName">
+                    <strong>Source:</strong>
+                    <a :href="recipe.sourceUrl" target="_blank">{{
+                        recipe.sourceName }}
+                    </a>
+                </p>
+
                 <p v-if="recipe.spoonacularScore"><strong>Spoonacular Score:</strong> {{ recipe.spoonacularScore }}</p>
-                <p v-if="recipe.pricePerServing"><strong>Price Per Serving:</strong> ${{
-                    recipe.pricePerServing.toFixed(2) }}</p>
+
+                <p v-if="recipe.pricePerServing">
+                    <strong>Price Per Serving:</strong> ${{
+                    recipe.pricePerServing.toFixed(2) }}
+                </p>
+
                 <p v-if="recipe.creditsText"><strong>Credits:</strong> {{ recipe.creditsText }}</p>
             </div>
         </div>

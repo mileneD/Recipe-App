@@ -1,9 +1,10 @@
 <template>
+  <MainNav :searchRecipes="recipeStore.searchRecipes" :searchQuery="recipeStore.searchQuery" />
   <div class="home-container">
-    <MainNav :searchRecipes="recipeStore.searchRecipes" :searchQuery="recipeStore.searchQuery" />
+
+
 
     <div v-if="recipeStore.recipes.length > 0" class="d-flex flex-sm-wrap justify-center">
-      <h1 class="text-center mb-8 text-h4">Results</h1>
       <div class="d-flex flex-sm-wrap justify-center">
         <CardRecipe
           v-for="(r, index) in recipeStore.recipes"
@@ -44,8 +45,9 @@ export default {
 };
 </script>
 <style scoped>
+
 .home-container {
-  padding: 20px;
+  padding: 100px;
   max-width: 1200px;
   margin: 0 auto;
 }
