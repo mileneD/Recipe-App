@@ -2,14 +2,10 @@
   <div class="home-container">
     <MainNav :searchRecipes="searchRecipes" />
 
-
-
-
-
-    <div v-if="recipes.length > 0" class="recipe-list">
-      <h1 class="results-title">Results</h1>
-      <div class="recipes-wrapper">
-        <CardRecipe v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+    <div v-if="recipes.length > 0" class="d-flex flex-sm-wrap justify-center">
+      <h1 class="text-center mb-8 text-h4 ">Results</h1>
+      <div class="d-flex flex-sm-wrap justify-center">
+        <CardRecipe v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" @click="() => searchPageInfo(recipe.id)"/>
       </div>
     </div>
     <div v-else class="no-results">
@@ -20,6 +16,7 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { getRecipes } from '@/services/spoonacularService';
 import CardRecipe from './CardRecipe.vue';
 import MainNav from './MainNav.vue';
@@ -29,15 +26,22 @@ export default {
   components: { MainNav, CardRecipe },
   setup() {
     const recipes = ref([]);
+    const router = useRouter(); // Accéder au routeur
 
     const searchRecipes = async (query) => {
       const data = await getRecipes(query);
-      recipes.value = data.results || []; // Met à jour les recettes
+      recipes.value = data.results || [];
     };
+
+    const searchPageInfo = (id) => {
+      router.push({ name: 'info', params: { id } }); // Navigation vers la route info avec l'ID
+    };
+
 
     return {
       recipes,
       searchRecipes,
+      searchPageInfo
     };
   }
 }
@@ -50,35 +54,17 @@ export default {
   margin: 0 auto;
 }
 
-.results-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.recipe-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.recipes-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px; /* Espace entre les cartes de recettes */
-}
-
 .card-recipe {
-  width: 300px; /* Largeur fixe pour les cartes */
-  background: #f9f9f9; /* Couleur de fond des cartes */
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre pour un effet 3D */
-  padding: 16px; /* Padding intérieur */
+  width: 500px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 
 .no-results {
   text-align: center;
   font-size: 1.2rem;
-  color: #666; /* Couleur plus douce pour le texte */
+  color: #666;
 }
 </style>
