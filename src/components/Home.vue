@@ -2,8 +2,7 @@
   <MainNav />
   <div class="home-container">
     <div class="d-flex justify-center align-center">
-      <input v-model="query" placeholder="Search for recipes" class="search-input" />
-      <v-btn class="search-button" @click="recipeStore.searchRecipes(query)">Search</v-btn>
+      <input v-model="query" :keyup="recipeStore.searchRecipes(query)" placeholder="Search for recipes" class="search-input" />
     </div>
 
     <div v-if="recipeStore.recipes.length > 0" class="d-flex flex-sm-wrap justify-center">
