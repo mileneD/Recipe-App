@@ -1,51 +1,50 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { getRecipes, getRecipeInfo } from '@/services/spoonacularService';
-import recipesData from '../../db.json';
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import { getRecipes, getRecipeInfo } from "@/services/spoonacularService";
+import recipesData from "../../db.json";
 
-export const useRecipeStore = defineStore('recipeStore', () => {
-  const recipes = ref([]);
-  const recipe = ref(null);
-  const searchQuery = ref('');
-
-  const recipesExample = ref(recipesData.recipes);
-
+export const useRecipeStore = defineStore("recipeStore", () => {
+  const recipesMain = ref(recipesData.recipes);
+  const recipes = ref(recipesData.recipes);
+  const recipe = ref([]);
+  let oldQuery = ref("");
+  let query = ref("");
 
   const searchRecipes = async (query) => {
-    searchQuery.value = query;
-    try {
-      // const data = await getRecipes(query);
-      if (!query) {
-        recipes.value = recipesExample.value; // Si la requête est vide, affichez toutes les recettes
-      } else {
-        // Filtrer les recettes basées sur le query
-        recipes.value = recipesExample.value.filter(recipe => {
-          return (
-            recipe.title.toLowerCase().includes(query.toLowerCase()) ||
-            recipe.sourceName.toLowerCase().includes(query.toLowerCase())
-          );
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching recipes:', error);
+    // Met à jour oldQuery et searchQuery
+    oldQuery.value = query.value;
+
+    if (query === "") {
+      // Si le champ de recherche est vide, retourne toutes les recettes
+      return recipesMain.value;
+    } else {
+      const queryWords = query.toLowerCase().split(" ");
+
+      recipes.value = recipesMain.value.filter((recipe) => {
+        return queryWords.some((word) =>
+          recipe.title.toLowerCase().includes(word)
+        );
+      });
     }
   };
 
   const fetchRecipeInfo = async (id) => {
     try {
-      // recipe.value = await getRecipeInfo(id);
-      recipes.value = recipesExample;
+      // Cherchez la recette par son ID dans le tableau recipesMain
+      const foundRecipe = recipes.value.find((recipe) => recipe.id === id);
+      recipe.value = foundRecipe || null; // Mettez à jour recipe avec la recette trouvée
     } catch (error) {
-      console.error('Error fetching recipe info:', error);
+      console.error("Error fetching recipe info:", error);
     }
   };
 
   return {
     recipes,
     recipe,
-    searchQuery,
+    query,
     searchRecipes,
-    recipesExample,
+    recipesMain,
     fetchRecipeInfo,
+    oldQuery,
   };
 });
