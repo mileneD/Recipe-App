@@ -1,7 +1,7 @@
 <template>
   <MainNav />
 
-  <div class="recipe-container">
+  <div class="recipe-container mt-4">
     <h1 class="text-center">Recipe Information</h1>
 
 
@@ -48,7 +48,7 @@
         </p>
       </div>
     </div>
-    <router-link :to="{ name: 'home', query: { q: query } }" class="btn-back">Back to
+    <router-link :to="{ name: 'home', query: { q: query } }" class="btn-back mt-4">Back to
       Results</router-link>
   </div>
 </template>
@@ -104,17 +104,23 @@ export default {
 }
 
 .recipe-container {
-  background-color: #fff;
+  background-color: #ffe4e6; /* Rose pastel */
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
 }
 
 .recipe-card {
   text-align: center;
+  background-color: #fff; /* Couleur de fond blanche à l'intérieur de la carte */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
+
 
 h1 {
   font-size: 24px;
