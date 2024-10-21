@@ -3,7 +3,7 @@
     {
       "id": 716429,
       "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-      "image": "https://img.spoonacular.com/recipes/716429-556x370.jpg",
+      "image": "https://res.cloudinary.com/hksqkdlah/image/upload/ar_1:1,c_fill,dpr_2.0,f_auto,fl_lossy.progressive.strip_profile,g_faces:auto,q_auto:low,w_344/20194_sfs-campanelle-bacon-cauliflower-toasted-breadcrumb-50",
       "servings": 2,
       "readyInMinutes": 45,
       "cookingMinutes": 25,
@@ -23,7 +23,7 @@
     {
       "id": 716430,
       "title": "Vegetable Stir-Fry with Tofu",
-      "image": "https://img.spoonacular.com/recipes/716430-556x370.jpg",
+      "image": "https://rainbowplantlife.com/wp-content/uploads/2023/01/tofu-stir-fry-cover-photo-1-of-1.jpg",
       "servings": 4,
       "readyInMinutes": 30,
       "cookingMinutes": 15,
@@ -43,7 +43,7 @@
     {
       "id": 716431,
       "title": "Chicken Curry with Coconut Milk",
-      "image": "https://img.spoonacular.com/recipes/716431-556x370.jpg",
+      "image": "https://www.jocooks.com/wp-content/uploads/2019/10/coconut-chicken-curry-1-10.jpg",
       "servings": 4,
       "readyInMinutes": 50,
       "cookingMinutes": 30,
@@ -63,7 +63,7 @@
     {
       "id": 716432,
       "title": "Quinoa Salad with Black Beans and Corn",
-      "image": "https://img.spoonacular.com/recipes/716432-556x370.jpg",
+      "image": "https://www.healthygffamily.com/wp-content/uploads/2018/03/IMG_3666-720x720.jpg",
       "servings": 3,
       "readyInMinutes": 20,
       "cookingMinutes": 10,
@@ -83,7 +83,7 @@
     {
       "id": 716433,
       "title": "Chocolate Chip Cookies",
-      "image": "https://img.spoonacular.com/recipes/716433-556x370.jpg",
+      "image": "https://www.eatyourselfskinny.com/wp-content/uploads/2023/11/chocolate-chip-cookies-44-1200x1703.jpg",
       "servings": 12,
       "readyInMinutes": 40,
       "cookingMinutes": 15,
@@ -103,7 +103,7 @@
     {
       "id": 716434,
       "title": "Vegetable Lasagna",
-      "image": "https://img.spoonacular.com/recipes/716434-556x370.jpg",
+      "image": "https://images.themodernproper.com/billowy-turkey/production/posts/2022/VegetableLasagna_17.jpg?w=960&h=720&q=82&fm=jpg&fit=crop&dm=1669251492&s=97bb757fab3dd30ef308428fceb6ae95",
       "servings": 6,
       "readyInMinutes": 60,
       "cookingMinutes": 40,
@@ -123,7 +123,7 @@
     {
       "id": 716435,
       "title": "Shrimp Tacos with Avocado Salsa",
-      "image": "https://img.spoonacular.com/recipes/716435-556x370.jpg",
+      "image": "https://marisamoore.com/wp-content/uploads/2020/02/Chipotle-Shrimp-Tacos-6.jpg",
       "servings": 4,
       "readyInMinutes": 30,
       "cookingMinutes": 15,
@@ -143,7 +143,7 @@
     {
       "id": 716436,
       "title": "Beef Stir-Fry",
-      "image": "https://img.spoonacular.com/recipes/716436-556x370.jpg",
+      "image": "https://thegirlonbloor.com/wp-content/uploads/2019/04/The-best-Beef-stir-fry-3.jpg",
       "servings": 4,
       "readyInMinutes": 25,
       "cookingMinutes": 15,
@@ -163,7 +163,7 @@
     {
       "id": 716437,
       "title": "Banana Bread",
-      "image": "https://img.spoonacular.com/recipes/716437-556x370.jpg",
+      "image": "https://www.mamaknowsglutenfree.com/wp-content/uploads/2017/04/featured-gluten-free-banana-bread-recipe.jpg",
       "servings": 8,
       "readyInMinutes": 70,
       "cookingMinutes": 60,
@@ -183,7 +183,7 @@
     {
       "id": 716438,
       "title": "Caesar Salad",
-      "image": "https://img.spoonacular.com/recipes/716438-556x370.jpg",
+      "image": "https://www.seriouseats.com/thmb/Fi_FEyVa3_-_uzfXh6OdLrzal2M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/the-best-caesar-salad-recipe-06-40e70f549ba2489db09355abd62f79a9.jpg",
       "servings": 4,
       "readyInMinutes": 20,
       "cookingMinutes": 0,
