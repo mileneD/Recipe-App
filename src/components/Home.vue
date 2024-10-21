@@ -30,6 +30,7 @@ export default {
     const recipeStore = useRecipeStore();
     const router = useRouter();
     const query = ref("");
+    const user = ref("")
 
     const searchPageInfo = (id) => {
       router.push({
@@ -49,7 +50,7 @@ export default {
 <style scoped>
 .search-button {
   background-color: #1976d2;
-  color: white;
+  color: #f9f7f3;
   border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.3s;

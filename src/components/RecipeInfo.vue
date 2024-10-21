@@ -90,8 +90,8 @@ export default {
 <style scoped>
 .btn-back {
   display: inline-block;
-  background-color: #007bff;
-  color: white;
+  background-color: #0fa3b1;
+  color: #f9f7f3;
   max-width: 200px;
   border: none;
   border-radius: 5px;
@@ -104,7 +104,7 @@ export default {
 }
 
 .recipe-container {
-  background-color: #ffe4e6; /* Rose pastel */
+  background-color: #eddea4; /* Rose pastel */
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
@@ -115,7 +115,7 @@ export default {
 
 .recipe-card {
   text-align: center;
-  background-color: #fff; /* Couleur de fond blanche à l'intérieur de la carte */
+  background-color: #f9f7f3; /* Couleur de fond blanche à l'intérieur de la carte */
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
@@ -158,6 +158,7 @@ strong {
 }
 
 .btn-back:hover {
-  background-color: #0056b3;
+  background-color: #b5e2fa;
+  color: black;
 }
 </style>

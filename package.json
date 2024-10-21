@@ -11,6 +11,7 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.3.3",
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.7",
     "pinia": "^2.2.4",
