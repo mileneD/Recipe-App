@@ -12,7 +12,7 @@ export const useRecipeStore = defineStore("recipeStore", () => {
 
   const searchRecipes = async (query) => {
     // Met à jour oldQuery et searchQuery
-    oldQuery.value = query.value;
+    recipes.value = recipesMain.value;
 
     if (query === "") {
       // Si le champ de recherche est vide, retourne toutes les recettes
@@ -20,7 +20,7 @@ export const useRecipeStore = defineStore("recipeStore", () => {
     } else {
       const queryWords = query.toLowerCase().split(" ");
 
-      recipes.value = recipesMain.value.filter((recipe) => {
+      recipes.value = recipes.value.filter((recipe) => {
         return queryWords.some((word) =>
           recipe.title.toLowerCase().includes(word)
         );
