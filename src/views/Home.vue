@@ -19,8 +19,8 @@
 <script>
 import { useRecipeStore } from "../stores/recipeStore";
 import { useRouter } from "vue-router";
-import CardRecipe from "./CardRecipe.vue";
-import MainNav from "./MainNav.vue";
+import CardRecipe from "../components/CardRecipe.vue";
+import MainNav from "../components/MainNav.vue";
 import { ref, } from "vue";
 
 export default {

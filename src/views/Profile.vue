@@ -20,8 +20,8 @@
 
 <script setup>
 import { useAuth0 } from '@auth0/auth0-vue';
-import MainNav from './MainNav.vue';
-import DialogProfile from './DialogProfile.vue';
+import MainNav from '../components/MainNav.vue';
+import DialogProfile from '../components/DialogProfile.vue';
 import { useDialogStore } from '../stores/userStore.js';
 
 const { user } = useAuth0();
