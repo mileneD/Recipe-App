@@ -2,10 +2,18 @@
   <div>
     <v-app-bar app :elevation="2" class="app-bar">
       <v-app-bar-title>Find a recipe</v-app-bar-title>
-      <router-link :to="{ name: 'login' }">
-        <v-btn class="login-logout-btn mr-4">Log in</v-btn>
-        <v-btn class="login-logout-btn mr-4">Log out</v-btn>
-      </router-link>
+
+
+        <template v-if="!isAuthenticated">
+          <BtnSignUp />
+          <BtnLogIn />
+        </template>
+
+        <template v-if="isAuthenticated">
+          <BtnLogOut />
+        </template>
+
+
     </v-app-bar>
 
     <!-- Contenu qui sera poussé sous la barre d'application -->
@@ -15,28 +23,29 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { useRecipeStore } from "../stores/recipeStore";
 import { useAuth0 } from '@auth0/auth0-vue';
+import BtnLogOut from "./buttons/BtnLogOut.vue";
+import BtnSignUp from "./buttons/BtnSignUp.vue";
+import BtnLogIn from "./buttons/BtnLogIn.vue";
 
-export default {
-  name: "MainNav",
+// Utilisation du store pour les recettes
+const recipeStore = useRecipeStore();
 
-  setup() {
-    const recipeStore = useRecipeStore();
-    const query = ref("");
-    const { logout } = useAuth0();
+// Définir la propriété réactive pour la recherche
+const query = ref("");
 
-    return {
-      recipeStore,
-      query,
-      logout: () => {
-        logout({ logoutParams: { returnTo: window.location.origin } });
-      }
-    };
-  },
-};
+// Récupérer la fonction logout depuis Auth0
+// const { logout } = useAuth0();
+
+const {isAuthenticated} = useAuth0();
+
+// // Définir la logique de déconnexion
+// const handleLogout = () => {
+//   logout({ logoutParams: { returnTo: window.location.origin } });
+// };
 </script>
 
 <style scoped>
@@ -47,13 +56,7 @@ export default {
 
 }
 
-.login-logout-btn {
-  background: linear-gradient(90deg, #0fa3b1, #0fa3b1);
-  color: #f9f7f3;
-  border-radius: 20px;
-  padding: 10px 20px;
-  transition: background-color 0.3s, transform 0.2s;
-}
+
 
 .search-button:hover {
   background-color: #f7a072;

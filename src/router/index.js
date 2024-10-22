@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
 import RecipeInfo from '@/components/RecipeInfo.vue'
-import Login from '@/components/Login.vue'
-import UserProfile from '@/components/UserProfile.vue'
+import CallBack from '@/components/CallBack.vue'
 
 const routes = [
   {
@@ -16,14 +15,9 @@ const routes = [
     component: RecipeInfo,
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: UserProfile,
+    path: '/callback',
+    name: 'callback',
+    component: CallBack,
   },
 ]
 

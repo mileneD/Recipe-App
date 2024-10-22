@@ -9,7 +9,6 @@ export const useRecipeStore = defineStore("recipeStore", () => {
   const recipe = ref([]);
   let oldQuery = ref("");
   let query = ref("");
-  const user = ref("")
 
   const searchRecipes = async (query) => {
     // Met à jour oldQuery et searchQuery

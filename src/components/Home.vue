@@ -30,7 +30,7 @@ export default {
     const recipeStore = useRecipeStore();
     const router = useRouter();
     const query = ref("");
-    const user = ref("")
+
 
     const searchPageInfo = (id) => {
       router.push({

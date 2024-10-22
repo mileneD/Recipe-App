@@ -21,28 +21,26 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
-export default {
-  props: {
-    recipe: {
-      type: Object,
-      required: true,
-    },
-  },
-  setup() {
-    const imageError = ref(false);
 
-    return {
-      imageError,
-    };
+// Les props sont passées directement dans la fonction
+const props = defineProps({
+  recipe: {
+    type: Object,
+    required: true,
   },
-};
+});
+
+// Définir les propriétés réactives
+const imageError = ref(false);
 </script>
+
 
 <style scoped>
 .card-recipe {
-  width: 300px; /* Largeur fixe de la carte */
+  width: 300px;
+  /* Largeur fixe de la carte */
   height: auto;
   cursor: pointer;
 }
