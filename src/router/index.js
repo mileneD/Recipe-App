@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/components/Home.vue'
+import Home from '@/views/Home.vue'
 import RecipeInfo from '@/components/RecipeInfo.vue'
-import CallBack from '@/components/CallBack.vue'
-import Profile from '@/components/Profile.vue'
+import CallBack from '@/views/CallBack.vue'
+import Profile from '@/views/Profile.vue'
 
 const routes = [
   {
