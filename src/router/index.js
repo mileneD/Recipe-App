@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
 import RecipeInfo from '@/components/RecipeInfo.vue'
 import CallBack from '@/components/CallBack.vue'
+import Profile from '@/components/Profile.vue'
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/recipe/:id',
     name: 'info',
     component: RecipeInfo,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
   },
   {
     path: '/callback',

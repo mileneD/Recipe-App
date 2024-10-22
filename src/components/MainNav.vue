@@ -24,28 +24,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRecipeStore } from "../stores/recipeStore";
 import { useAuth0 } from '@auth0/auth0-vue';
 import BtnLogOut from "./buttons/BtnLogOut.vue";
 import BtnSignUp from "./buttons/BtnSignUp.vue";
 import BtnLogIn from "./buttons/BtnLogIn.vue";
 
-// Utilisation du store pour les recettes
-const recipeStore = useRecipeStore();
-
-// Définir la propriété réactive pour la recherche
-const query = ref("");
-
-// Récupérer la fonction logout depuis Auth0
-// const { logout } = useAuth0();
-
 const {isAuthenticated} = useAuth0();
 
-// // Définir la logique de déconnexion
-// const handleLogout = () => {
-//   logout({ logoutParams: { returnTo: window.location.origin } });
-// };
 </script>
 
 <style scoped>
