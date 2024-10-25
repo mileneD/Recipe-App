@@ -6,16 +6,7 @@
                 <!-- Champs existants -->
                 <v-text-field label="Nom" v-model="newName" />
                 <v-text-field label="Photo de profil" v-model="newPicture" />
-
-                <!-- Nouveaux champs du JSON -->
-                <v-text-field label="Email" v-model="newEmail" />
-                <v-text-field label="Numéro de téléphone" v-model="newPhoneNumber" />
-                <v-text-field label="Prénom" v-model="givenName" />
-                <v-text-field label="Nom de famille" v-model="familyName" />
                 <v-text-field label="Surnom" v-model="nickname" />
-                <v-checkbox label="Bloqué" v-model="blocked" />
-                <v-checkbox label="Email vérifié" v-model="emailVerified" />
-                <v-checkbox label="Téléphone vérifié" v-model="phoneVerified" />
             </v-card-text>
             <v-card-actions>
                 <v-btn color="blue darken-1" text @click="saveProfile">Sauvegarder</v-btn>
@@ -31,90 +22,54 @@ import { useAuth0 } from '@auth0/auth0-vue';
 import { useDialogStore } from '../stores/userStore.js';
 import axios from 'axios';
 
-
+// Auth0 et Dialog Store
 const { user, getAccessTokenSilently } = useAuth0();
 const dialogStore = useDialogStore();
 
 // Variables pour gérer les nouvelles données
 const newName = ref('');
 const newPicture = ref('');
-const newEmail = ref('');
-const newPhoneNumber = ref('');
-const emailVerified = ref(false);
-const phoneVerified = ref(false);
-const givenName = ref('');
-const familyName = ref('');
 const nickname = ref('');
-const blocked = ref(false);
-const verifyEmail = ref(false);
-const verifyPhoneNumber = ref(false);
 
 // Remplir les champs avec les valeurs existantes
 onMounted(() => {
     newName.value = user.value?.name || '';
     newPicture.value = user.value?.picture || '';
-    newEmail.value = user.value?.email || '';
-    newPhoneNumber.value = user.value?.phone_number || '';
-    emailVerified.value = user.value?.email_verified || false;
-    phoneVerified.value = user.value?.phone_verified || false;
-    givenName.value = user.value?.given_name || '';
-    familyName.value = user.value?.family_name || '';
     nickname.value = user.value?.nickname || '';
-    blocked.value = user.value?.blocked || false;
 });
 
 // Fonction pour sauvegarder les modifications du profil
 const saveProfile = async () => {
     try {
         const accessToken = await getAccessTokenSilently({
-            audience: 'https://dev-fl5og68se0rlagw7.us.auth0.com/api/v2/',
-            scope: 'update:users update:current_user_metadata'
+            audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+            scope: 'update:users update:users_app_metadata update:current_user_metadata'
         });
 
-        console.log('Access Token:', accessToken);
+        // ID utilisateur
+        const userId = user.value.sub;
 
-        // Construire les données à envoyer
-        const data = {
-            blocked: blocked.value,
-            email_verified: emailVerified.value,
-            email: newEmail.value || null, // Assurez-vous d'envoyer null si vide
-            phone_number: newPhoneNumber.value || null,
-            phone_verified: phoneVerified.value,
-            user_metadata: {}, // Remplissez si nécessaire
-            app_metadata: {}, // Remplissez si nécessaire
-            given_name: givenName.value || null,
-            family_name: familyName.value || null,
-            name: newName.value || null,
-            nickname: nickname.value || null,
-            picture: newPicture.value || null,
-            verify_email: verifyEmail.value || false,
-            verify_phone_number: verifyPhoneNumber.value || false,
-            password: null, // Remplacez par la valeur souhaitée ou laissez null
-            connection: null, // Remplacez par la valeur souhaitée ou laissez null
-            client_id: null, // Remplacez par la valeur souhaitée ou laissez null
-            username: null // Remplacez par la valeur souhaitée ou laissez null
-        };
-
-        const config = {
-            method: 'patch',
-            maxBodyLength: Infinity,
-            url: `https://dev-fl5og68se0rlagw7.us.auth0.com/api/v2/users/${user.value.sub}`, // ID de l'utilisateur
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`,
-                'Accept': 'application/json'
+        // Requête PATCH pour mettre à jour le profil
+        const response = await axios.patch(
+            `${import.meta.env.VITE_AUTH0_AUDIENCE}/users/${userId}`,
+            {
+                name: newName.value,
+                picture: newPicture.value,
+                nickname: nickname.value,
             },
-            data: JSON.stringify(data) // Vérifiez que les données sont bien sérialisées
-        };
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
-        const response = await axios.request(config);
-        console.log(JSON.stringify(response.data));
-
-        dialogStore.closeDialog();
+        console.log('Profil mis à jour avec succès:', response.data);
         alert('Profil mis à jour avec succès');
+        dialogStore.closeDialog();
     } catch (error) {
-        console.error('Erreur lors de la mise à jour du profil:', error.response.data);
-        alert('Erreur lors de la mise à jour du profil : ' + (error.response.data.message || 'Erreur inconnue.'));
+        console.error('Erreur lors de la mise à jour du profil:', error.response?.data || error.message);
     }
 };
 </script>

@@ -9,6 +9,10 @@
             <v-col cols="12" md="8" class="text-center text-md-left">
                 <h2>{{ user?.name }}</h2>
                 <p class="lead text-muted">{{ user?.email }}</p>
+                <p class="lead text-muted">{{ user?.picture }}</p>
+                <p class="lead text-muted">{{ user?.nickname }}</p>
+                {{ user }}
+
                 <v-btn color="primary" @click="openEditProfileDialog">Modifier le profil</v-btn>
             </v-col>
         </v-row>
